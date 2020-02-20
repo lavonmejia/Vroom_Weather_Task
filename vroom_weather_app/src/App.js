@@ -1,24 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+
+import { Route } from "react-router-dom";
+
+import Container from "react-bootstrap/Container";
+import NavBar from "./components/Header/nav";
+import OneDayBody from "./components/Weather_Body/One_Day_Body";
+import Footer from "./components/Footer/footer";
+import DemoCarousel from "./components/Fun_Body/ForTheGram";
+import GetFiveDay from "./components/Weather_Body/Five_Day_Api";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div>
+        <NavBar />
+      </div>
+      <Container>
+        <Route exact path="/" component={OneDayBody} />
+        <Route exact path="/fiveforecast" component={GetFiveDay} />
+        <Route exact path="/social" component={DemoCarousel} />
+
+        <Footer />
+      </Container>
     </div>
   );
 }
