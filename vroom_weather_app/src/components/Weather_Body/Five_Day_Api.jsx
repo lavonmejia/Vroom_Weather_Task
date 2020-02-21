@@ -17,6 +17,12 @@ export default function GetFiveDay() {
   // state variables to hold the response from the API
   const [fiveDayWeather, setFiveDayWeather] = useState();
 
+  let dateFilter = forecast => {
+    let dt = new Date(forecast.dt * 1000);
+    let hr = dt.getUTCHours();
+    return hr == 12;
+  };
+
   useEffect(() => {
     axios
       .get(
@@ -24,9 +30,10 @@ export default function GetFiveDay() {
         `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&units=imperial&appid=32cddcf330af3f3a6c27f66b15443c42`
       )
 
-      
       .then(response => {
+        response.data.list = response.data.list.filter(dateFilter);
         setFiveDayWeather(response.data);
+        // setFiveDayWeather(response_data);
       });
     //   The use effect array needs something to know when to call the API. We're saying to call the api whenver the latitude or longitude updates.
   }, [latitude, longitude]);
@@ -34,7 +41,6 @@ export default function GetFiveDay() {
   //   Return needs an if/else to support not having the api called yet or not having the variables at all. Error handling could be more robust
   if (fiveDayWeather) {
     // let icon_image = `http://openweathermap.org/img/wn/${oneDayWeather.weather[0]["icon"]}@2x.png`;
-
     return (
       // Examples below of pulling data out of the data object
       <section>
@@ -53,17 +59,22 @@ export default function GetFiveDay() {
               <Card.Body>
                 <Card.Title> Day 1 </Card.Title>
                 <Card.Text>
-                  <div>
-                    Temp: <h5>{fiveDayWeather.list[5]["main"].temp} F</h5>
-                  </div>
-                  <div>
+                  <span>
+                    Temp:{" "}
+                    <strong>{fiveDayWeather.list[0]["main"].temp} F</strong>
+                  </span>
+                  <br></br>
+                  <span>
                     Will Feel Like:{" "}
-                    <h5> {fiveDayWeather.list[5]["main"].feels_like} F </h5>
-                  </div>
-                  <div>
+                    <strong>
+                      {" "}
+                      {fiveDayWeather.list[0]["main"].feels_like} F{" "}
+                    </strong>
+                  </span>
+                  <span>
                     Humidity:{" "}
-                    <h5>{fiveDayWeather.list[5]["main"].feels_like}</h5>
-                  </div>
+                    <strong>{fiveDayWeather.list[0]["main"].feels_like}</strong>
+                  </span>
                 </Card.Text>
               </Card.Body>
             </Card>
@@ -78,17 +89,21 @@ export default function GetFiveDay() {
               <Card.Body>
                 <Card.Title>Day 2</Card.Title>
                 <Card.Text>
-                  <div>
-                    Temp: <h5>{fiveDayWeather.list[13]["main"].temp} F</h5>
-                  </div>
-                  <div>
+                  <span>
+                    Temp:{" "}
+                    <strong>{fiveDayWeather.list[1]["main"].temp} F</strong>
+                  </span>
+                  <span>
                     Will Feel Like:{" "}
-                    <h5> {fiveDayWeather.list[13]["main"].feels_like} F </h5>
-                  </div>
-                  <div>
+                    <strong>
+                      {" "}
+                      {fiveDayWeather.list[1]["main"].feels_like} F{" "}
+                    </strong>
+                  </span>
+                  <span>
                     Humidity:{" "}
-                    <h5>{fiveDayWeather.list[13]["main"].feels_like}</h5>
-                  </div>
+                    <strong>{fiveDayWeather.list[1]["main"].feels_like}</strong>
+                  </span>
                 </Card.Text>
               </Card.Body>
             </Card>
@@ -103,17 +118,21 @@ export default function GetFiveDay() {
               <Card.Body>
                 <Card.Title>Day 3</Card.Title>
                 <Card.Text>
-                  <div>
-                    Temp: <h5>{fiveDayWeather.list[21]["main"].temp} F</h5>
-                  </div>
-                  <div>
+                  <span>
+                    Temp:{" "}
+                    <strong>{fiveDayWeather.list[2]["main"].temp} F</strong>
+                  </span>
+                  <span>
                     Will Feel Like:{" "}
-                    <h5> {fiveDayWeather.list[21]["main"].feels_like} F </h5>
-                  </div>
-                  <div>
+                    <strong>
+                      {" "}
+                      {fiveDayWeather.list[2]["main"].feels_like} F{" "}
+                    </strong>
+                  </span>
+                  <span>
                     Humidity:{" "}
-                    <h5>{fiveDayWeather.list[21]["main"].feels_like}</h5>
-                  </div>
+                    <strong>{fiveDayWeather.list[2]["main"].feels_like}</strong>
+                  </span>
                 </Card.Text>
               </Card.Body>
             </Card>
@@ -128,17 +147,21 @@ export default function GetFiveDay() {
               <Card.Body>
                 <Card.Title>Day 4</Card.Title>
                 <Card.Text>
-                  <div>
-                    Temp: <h5>{fiveDayWeather.list[29]["main"].temp} F</h5>
-                  </div>
-                  <div>
+                  <span>
+                    Temp:{" "}
+                    <strong>{fiveDayWeather.list[3]["main"].temp} F</strong>
+                  </span>
+                  <span>
                     Will Feel Like:{" "}
-                    <h5> {fiveDayWeather.list[29]["main"].feels_like} F </h5>
-                  </div>
-                  <div>
+                    <strong>
+                      {" "}
+                      {fiveDayWeather.list[3]["main"].feels_like} F{" "}
+                    </strong>
+                  </span>
+                  <span>
                     Humidity:{" "}
-                    <h5>{fiveDayWeather.list[29]["main"].feels_like}</h5>
-                  </div>
+                    <strong>{fiveDayWeather.list[3]["main"].feels_like}</strong>
+                  </span>
                 </Card.Text>
               </Card.Body>
             </Card>
@@ -153,17 +176,21 @@ export default function GetFiveDay() {
               <Card.Body>
                 <Card.Title>Day 5</Card.Title>
                 <Card.Text>
-                  <div>
-                    Temp: <h5>{fiveDayWeather.list[37]["main"].temp} F</h5>
-                  </div>
-                  <div>
+                  <span>
+                    Temp:{" "}
+                    <strong>{fiveDayWeather.list[4]["main"].temp} F</strong>
+                  </span>
+                  <span>
                     Will Feel Like:{" "}
-                    <h5> {fiveDayWeather.list[37]["main"].feels_like} F </h5>
-                  </div>
-                  <div>
+                    <strong>
+                      {" "}
+                      {fiveDayWeather.list[4]["main"].feels_like} F{" "}
+                    </strong>
+                  </span>
+                  <span>
                     Humidity:{" "}
-                    <h5>{fiveDayWeather.list[37]["main"].feels_like}</h5>
-                  </div>
+                    <strong>{fiveDayWeather.list[4]["main"].feels_like}</strong>
+                  </span>
                 </Card.Text>
               </Card.Body>
             </Card>
@@ -175,7 +202,7 @@ export default function GetFiveDay() {
   } else {
     return (
       <section>
-        <p>Loading....</p>
+        <span>Loading....</span>
       </section>
     );
   }
