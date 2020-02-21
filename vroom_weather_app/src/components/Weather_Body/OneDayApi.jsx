@@ -51,7 +51,7 @@ export default function GetOneDay() {
   } else {
     return (
       <section>
-        <p>Loading....</p>
+        <span>Loading....</span>
       </section>
     );
   }
