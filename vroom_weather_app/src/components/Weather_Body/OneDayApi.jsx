@@ -18,7 +18,7 @@ export default function GetOneDay() {
         //   populate the api call with the latitude and longitude of the location
         `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=imperial&appid=32cddcf330af3f3a6c27f66b15443c42`
       )
-      .then(response => {
+      .then((response) => {
         setOneDayWeather(response.data);
       });
     //   The use effect array needs something to know when to call the API. We're saying to call the api whenver the latitude or longitude updates.
@@ -45,6 +45,7 @@ export default function GetOneDay() {
         </div>
         <img
           src={`http://openweathermap.org/img/wn/${oneDayWeather.weather[0]["icon"]}@2x.png`}
+          alt="weather icon"
         />
       </section>
     );
